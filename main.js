@@ -1,4 +1,5 @@
 var struc, levels;
+var thisYear = new Date().getFullYear() - 1911;
 $(function() {
   $.getJSON('struc.json', {}, function(r) {
     struc = r;
@@ -52,6 +53,10 @@ $(function() {
   });
   $('.updateResult').change(function() {
     var year = parseInt($('#year').val());
+    if(year > thisYear) {
+      year = thisYear;
+      $('#year').val(thisYear);
+    }
     var month = parseInt($('#month').val());
     var area = parseFloat($('#area').val());
     var strucBase = $('#strucBase').val();
