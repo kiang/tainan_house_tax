@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>臺南市房屋稅概算</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <meta property="og:title" content="臺南市房屋稅概算">
+        <meta property="og:description" content="就已知的資訊進行房屋稅概算，希望協助釐清房屋稅調漲爭議">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="http://kiang.github.io/tainan_house_tax/og_image.png">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style>
+        input[type='radio'] { transform: scale(2); }
+        </style>
+    </head>
+    <body>
+      <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=1393405437614114&version=v2.3";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, "script", "facebook-jssdk"));
+        </script>
+        <div class="container">
+            <div class="row">
+                <p class="hidden-sm hidden-xs">&nbsp;</p>
+                <div id="detail" class="col-md-12">
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+                      <h1>臺南市房屋稅概算</h1>
+                      <table class="table table-bordered">
+                        <tr>
+                          <td>使用執照核發年月</td>
+                          <td>
+                            <input type="text" id="year" class="col-md-6 updateResult" placeholder="民國年" />
+                            <select id="month" class="col-md-6 updateResult">
+                              <option>1月</option>
+                              <option>2月</option>
+                              <option>3月</option>
+                              <option>4月</option>
+                              <option>5月</option>
+                              <option>6月</option>
+                              <option>7月</option>
+                              <option>8月</option>
+                              <option>9月</option>
+                              <option>10月</option>
+                              <option>11月</option>
+                              <option>12月</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>建物總面積</td>
+                          <td>
+                            <input type="text" id="area" class="col-md-12 updateResult" placeholder="平方公尺" />
+                            <div class="col-md-12">1 平方公尺 = 0.3025 坪</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>構造</td>
+                          <td>
+                            <select id="strucBase" class="col-md-12"></select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>用途</td>
+                          <td>
+                            <select id="strucApp" class="col-md-12"></select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>建物總樓層</td>
+                          <td>
+                            <select id="strucLevel" class="col-md-12 updateResult"></select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>路段</td>
+                          <td>
+                            <select id="level1" class="col-md-4"></select>
+                            <select id="level2" class="col-md-4"></select>
+                            <select id="level3" class="col-md-4 updateResult"></select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>房屋稅類型</td>
+                          <td>
+                            <select id="taxType" class="col-md-12 updateResult">
+                              <option value="1.2">自住</option>
+                              <option value="3">營業用</option>
+                              <option value="2">非營業非自住</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <h2 id="result" style="color:red; text-align: center;"></h2>
+                            <div id="detail" class="col-md-12"></div>
+                          </td>
+                        </tr>
+                      </table>
+                      注意事項：
+                      <ul>
+                        <li>本網頁程式直接以標準單價作為核定單價，也不考慮公式以外的例外狀況</li>
+                        <li>核定單價=標準單價×(1±各加減項之加減率)±樓層高度之超高或偏低價</li>
+                        <li>房屋課稅現值=核定單價×面積×(1-折舊率×折舊年數)×街路等級調整率(地段率)</li>
+                        <li>房屋稅稅率 - 自住 1.2%、營業用 3%、非營業非自住 2%</li>
+                        <li>以 105 年為基礎，標準單價在 106 年為 1.54 、 107 年為 1.65 、 108 年以後為 1.81 ， 90 年 7 月以後房屋適用新標準單價</li>
+                        <li>房屋稅1年徵收1次，目前是訂在每年5月1日開徵至5月31日截止，課稅期間是前1年的7月1日起算至當年6月30日止。</li>
+                      </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <p>&nbsp;</p>
+                        <div id="fb-root"></div>
+                        <div class="fb-page" data-href="https://www.facebook.com/k.olc.tw" data-width="800" data-hide-cover="true" data-show-facepile="true" data-show-posts="false"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+              <a href="https://github.com/kiang/tainan_house_tax" target="_blank">網站原始碼</a> |
+              <a href="http://data.tainan.gov.tw/dataset/tainan-house-price" target="_blank">臺南市房屋標準單價表</a> |
+              <a href="http://data.tainan.gov.tw/dataset/tainan-house-struc" target="_blank">臺南市房屋構造別代號表</a> |
+              <a href="http://data.tainan.gov.tw/dataset/tainan-house-level" target="_blank">臺南市房屋路段等級表</a> |
+              <a href="http://data.tainan.gov.tw/dataset/tainan-house-application" target="_blank">臺南市房屋用途類別及用途細類別對照表</a>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
