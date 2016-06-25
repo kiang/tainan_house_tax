@@ -68,44 +68,79 @@ $(function() {
       rateYear -= 1;
     }
     var tax = getTax(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+    var showDetail = $('#showDetail').prop('checked');
     if(!isNaN(tax)) {
       var result = '105 年房屋稅 ' + tax;
+      if(showDetail) {
+        result += getDetail(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+      }
+
       rateYear += 1;
       tax = getTax(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
       if(year > 90 || (year == 90 && month > 6)) {
-        result += '<br />106 年房屋稅 ' + (tax * 1.54) + ' (調漲前 ' + tax + ')';
+        result += '<br />106 年房屋稅 ' + parseInt(tax * 1.54) + ' (調漲前 ' + tax + ')';
+        if(showDetail) {
+          result += getDetail(strucLevel * 1.54, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       } else {
         result += '<br />106 年房屋稅 ' + tax;
+        if(showDetail) {
+          result += getDetail(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       }
 
       rateYear += 1;
       tax = getTax(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
       if(year > 90 || (year == 90 && month > 6)) {
-        result += '<br />107 年房屋稅 ' + (tax * 1.65) + ' (調漲前 ' + tax + ')';
+        result += '<br />107 年房屋稅 ' + parseInt(tax * 1.65) + ' (調漲前 ' + tax + ')';
+        if(showDetail) {
+          result += getDetail(strucLevel * 1.65, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       } else {
         result += '<br />107 年房屋稅 ' + tax;
+        if(showDetail) {
+          result += getDetail(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       }
       rateYear += 1;
       tax = getTax(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
       if(year > 90 || (year == 90 && month > 6)) {
-        result += '<br />108 年房屋稅 ' + (tax * 1.81) + ' (調漲前 ' + tax + ')';
+        result += '<br />108 年房屋稅 ' + parseInt(tax * 1.81) + ' (調漲前 ' + tax + ')';
+        if(showDetail) {
+          result += getDetail(strucLevel * 1.81, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       } else {
         result += '<br />108 年房屋稅 ' + tax;
+        if(showDetail) {
+          result += getDetail(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       }
       rateYear += 1;
       tax = getTax(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
       if(year > 90 || (year == 90 && month > 6)) {
-        result += '<br />109 年房屋稅 ' + (tax * 1.81) + ' (調漲前 ' + tax + ')';
+        result += '<br />109 年房屋稅 ' + parseInt(tax * 1.81) + ' (調漲前 ' + tax + ')';
+        if(showDetail) {
+          result += getDetail(strucLevel * 1.81, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       } else {
         result += '<br />109 年房屋稅 ' + tax;
+        if(showDetail) {
+          result += getDetail(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       }
 
       rateYear += 1;
       tax = getTax(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
       if(year > 90 || (year == 90 && month > 6)) {
-        result += '<br />110 年房屋稅 ' + (tax * 1.81) + ' (調漲前 ' + tax + ')';
+        result += '<br />110 年房屋稅 ' + parseInt(tax * 1.81) + ' (調漲前 ' + tax + ')';
+        if(showDetail) {
+          result += getDetail(strucLevel * 1.81, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       } else {
         result += '<br />110 年房屋稅 ' + tax;
+        if(showDetail) {
+          result += getDetail(strucLevel, area, rateYear, struc[strucBase].rate, level3, taxType);
+        }
       }
 
       $('#result').html(result);
@@ -117,4 +152,9 @@ $(function() {
 
 function getTax(strucLevel, area, rateYear, rate, level3, taxType) {
   return parseInt(strucLevel * area * (1 - (rateYear * rate / 100)) * (level3 / 100) * (taxType / 100));
+}
+
+function getDetail(strucLevel, area, rateYear, rate, level3, taxType) {
+  strucLevel = parseInt(strucLevel);
+  return '<br /><small>' + strucLevel + '[標準單價] X ' + area + '[面積] X (1 - (' + rateYear + '[折舊年數] X ' + rate + ' / 100[折舊率])) X (' + level3 + ' / 100)[街路等級調整率] X (' + taxType + ' / 100)[房屋稅稅率]</small>';
 }
